@@ -1,0 +1,187 @@
+<nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm trolley-navbar">
+  <div class="container">
+      <div class="logo-outside">
+          <a class="navbar-brand" href="/home">
+              <img src="/logo/smart-trolley-logo.png" alt="Smart Trolley Logo" class="trolley-logo">
+          </a>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                  <a class="nav-link active" href="/home">Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/home/features">Features</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/home/listings/new">Products</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/home/contact">Contact Us</a>
+              </li>
+          </ul>
+          <div class="ms-lg-3 d-flex align-items-center">
+              <%if(!currUser) {%>
+                  <a href="/login" class="btn btn-modern-ghost me-2">Log In</a>
+                  <a href="/signup" class="btn btn-modern-primary">Sign Up</a>
+              <% } %>
+              <% if(currUser) { %>
+                  <a href="/home/cart" class="btn btn-modern-secondary me-2"><i class="bi bi-cart"></i> Cart</a>
+                  <a href="/logout" class="btn btn-modern-danger">Log Out</a>
+              <% } %>
+          </div>
+      </div>
+  </div>
+</nav>
+
+
+<style>
+    /* Global Variables for easy color adjustments (Modern UI/UX practice) */
+    :root {
+        --primary-color: #0d47a1; /* Deep Ocean Blue */
+        --secondary-color: #1565c0; /* Brighter Blue */
+        --text-color: #212529;
+        --nav-bg: #f8f9fa; /* Off-white/Light Gray Background */
+        --link-hover-bg: rgba(13, 71, 161, 0.05); /* Light hover effect */
+    }
+
+    /* 1. Increased Height & Background */
+    .trolley-navbar {
+        background-color: var(--nav-bg) !important;
+        /* Padding to increase the height significantly */
+        padding-top: 1rem; 
+        padding-bottom: 1rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .trolley-navbar .trolley-logo {
+        height: 48px; /* Slightly larger logo */
+        width: auto;
+    }
+    
+    .trolley-navbar .navbar-brand {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-color) !important;
+        letter-spacing: -0.5px; /* Tighter spacing for a modern look */
+    }
+
+    /* 2. Nav Links - Modern and Readable */
+    .trolley-navbar .nav-link {
+        color: var(--text-color) !important;
+        font-weight: 500;
+        font-size: 1.05rem; /* Slightly larger text */
+        position: relative;
+        margin: 0 15px; /* Increased horizontal spacing */
+        transition: color 0.3s ease, background-color 0.3s ease;
+        padding: 8px 10px; /* Padding for better click area/hover effect */
+        border-radius: 6px; /* Subtle rounded corners */
+    }
+
+    .trolley-navbar .nav-link.active {
+        color: var(--primary-color) !important;
+        font-weight: 600;
+        background-color: var(--link-hover-bg); /* Highlight active link with a subtle background */
+    }
+    
+    /* Removed the underline effect for a cleaner, modern look */
+    .trolley-navbar .nav-link::after {
+        content: none;
+    }
+
+    .trolley-navbar .nav-link:hover {
+        color: var(--primary-color) !important;
+        background-color: var(--link-hover-bg);
+    }
+    
+    /* --- 3. Modernized Buttons --- */
+    .trolley-navbar .btn {
+        font-weight: 600;
+        border-radius: 8px; /* Slightly less rounded than pills for a modern aesthetic */
+        padding: 10px 20px;
+        font-size: 1rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+    
+    /* Primary Action Button (Sign Up) */
+    .btn-modern-primary {
+        background-color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        color: white;
+    }
+
+    .btn-modern-primary:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Ghost/Outline Button (Log In) */
+    .btn-modern-ghost {
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        background-color: transparent;
+    }
+
+    .btn-modern-ghost:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Secondary/Cart Button */
+    .btn-modern-secondary {
+        background-color: #6c757d; 
+        border: 2px solid #6c757d;
+        color: white;
+    }
+
+    .btn-modern-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Danger/Logout Button */
+    .btn-modern-danger {
+        background-color: #dc3545;
+        border: 2px solid #dc3545;
+        color: white;
+        box-shadow: none; /* Keep logout simple */
+    }
+
+    .btn-modern-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+        transform: translateY(-1px);
+    }
+    
+    /* Mobile Adjustments (Ensuring height reduces gracefully) */
+    @media (max-width: 991px) {
+        .trolley-navbar {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .trolley-navbar .nav-link {
+            text-align: left;
+            margin: 0 0 5px 0;
+        }
+        .trolley-navbar .btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .trolley-navbar .trolley-logo {
+            height: 35px;
+        }
+    }
+</style>

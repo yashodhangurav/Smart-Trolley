@@ -1,0 +1,379 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<body>
+
+    <style>
+
+.product-card {
+            transition: transform 0.3s ease;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .price-tag {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .category-badge {
+            background: #f1f3ff;
+            color: #667eea;
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 15px;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .search-box {
+            max-width: 500px;
+        }
+
+        .filter-btn.active {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .stock-badge {
+            font-size: 0.75rem;
+        }
+
+/* Button */
+.view-btn {
+    background: linear-gradient(135deg, #007bff, #0056d8);
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: 0.3s;
+    border: none;
+}
+
+        .view-btn:hover {
+        background: linear-gradient(135deg, #005ce6, #0041b3);
+        transform: translateY(-3px);
+        }
+        .search-box {
+            max-width: 500px;
+        }
+
+        .filter-btn.active {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .stock-badge {
+            font-size: 0.75rem;
+        }
+
+        /* add badge */
+        .btn-dark-blue {
+            background-color: #013a8c !important;  /* Dark Blue */
+            border-color: #013a8c !important;
+            color: white !important;
+        }
+
+        .btn-dark-blue:hover {
+            background-color: #002b6a !important;  /* Slightly darker on hover */
+            border-color: #002b6a !important;
+        }
+
+
+    </style>
+
+
+
+
+
+
+<div class="container-fluid px-4 py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="fw-bold mb-2">All Products</h1>
+            <p class="text-muted">Browse and add products to your shopping cart</p>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="input-group search-box">
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="fas fa-search text-muted"></i>
+                </span>
+                <input type="text" class="form-control border-start-0" id="searchInput"
+                    placeholder="Search products by name or category...">
+                <button class="btn btn-outline-secondary" type="button" id="searchBtn">Search</button>
+            </div>
+        </div>
+        <div class="col-md-4 mt-3 mt-md-0">
+            <select class="form-select" id="sortSelect">
+                <option value="default">Sort by: Default</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name">Name: A to Z</option>
+            </select>
+        </div>
+    </div>
+ <!-- Category Filters -->
+ <div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-primary filter-btn active" data-category="all">
+                All Products
+            </button>
+            <button class="btn btn-outline-primary filter-btn" data-category="groceries">
+                Groceries
+            </button>
+            <button class="btn btn-outline-primary filter-btn" data-category="beauty">
+                Beauty
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row d-none" id="noResults">
+    <div class="col-12 text-center py-5">
+        <i class="fas fa-search fa-3x text-muted mb-3"></i>
+        <h4 class="text-muted">No products found</h4>
+        <p class="text-muted">Try a different search or filter</p>
+    </div>
+</div>
+
+<!-- image cards loaded here -->
+<div class="row g-4">
+
+    <% for(listing of allListings) { %>
+    <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card product-card">
+            <img src="<%=listing.imageUrl.url%>" class="product-image" alt="${product.name}">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <span class="category-badge"><%= listing.category %></span>
+                    <span class="stock-badge  <%=listing.stock%> < 10 ? 'text-danger' : 'text-success'}">
+                        <%=listing.stock%> in stock
+                    </span>
+                </div>
+                <h5 class="card-title fw-bold mb-2"> <%=listing.title%> </h5>
+                <p class="product-location"><%=listing.location%></p>
+                <p class="card-text text-muted small mb-3"><%listing.description %></p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="price-tag"> ₹ <%=listing.pricePerDay.toLocaleString("en-IN")%> </div>
+                        <div class="text-warning small">
+                            <% 
+                                const rating = listing.rating || 4.5;
+                                const fullStars = Math.floor(rating);
+                                const emptyStars = 5 - fullStars;
+                            %>
+                        
+                            <%= '★'.repeat(fullStars) %><%= '☆'.repeat(emptyStars) %>
+                        
+                            <span class="text-muted ms-1"> <%= rating %></span>
+                        </div>
+                    </div>
+                    <button 
+                        class="btn btn-dark-blue btn-sm d-flex align-items-center gap-1"
+                        data-product-id="<%= listing._id %>"
+                        onclick="addToCart(
+                                '<%= listing._id %>', 
+                                '<%= listing.title %>', 
+                                '<%= listing.pricePerDay %>', 
+                                '<%= listing.imageUrl.url %>'
+                            )">
+                        <i class="fas fa-cart-plus"></i>Add
+                  </button>
+                
+                
+
+                </div>
+                <a href="/home/listings/<%=listing._id%>" 
+                    class="btn view-btn w-100">
+                    View Details
+                 </a>
+            </div>
+        </div>
+    </div>
+    <% } %>
+    
+    </div>
+    
+
+
+
+<!-- Pagination -->
+<div class="row mt-5">
+    <div class="col-12">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- ------------------------------------------------------JavaScript functionality -------------------------------------------------------->
+<script>
+
+    // ------------------- SEARCH FUNCTION -------------------
+    document.getElementById("searchInput").addEventListener("input", function () {
+        const query = this.value.toLowerCase().trim();
+        filterProducts();
+    });
+    
+    // Search button
+    document.getElementById("searchBtn").addEventListener("click", filterProducts);
+    
+    // ------------------- SORT FUNCTION -------------------
+    document.getElementById("sortSelect").addEventListener("change", filterProducts);
+    
+    // ------------------- CATEGORY FILTER FUNCTION -------------------
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", function () {
+    
+            filterButtons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+    
+            filterProducts();
+        });
+    });
+    
+    // ------------------- MAIN FILTER FUNCTION -------------------
+    function filterProducts() {
+    
+        const searchValue = document.getElementById("searchInput").value.toLowerCase();
+        const sortValue = document.getElementById("sortSelect").value;
+        const selectedCategory = document.querySelector(".filter-btn.active").dataset.category;
+    
+        const cards = document.querySelectorAll(".product-card");
+        const wrappers = document.querySelectorAll(".col-md-6.col-lg-4.col-xl-3");
+    
+        let visibleCount = 0;
+    
+        wrappers.forEach((wrapper, index) => {
+            const card = cards[index];
+            const title = card.querySelector(".card-title").innerText.toLowerCase();
+            const category = card.querySelector(".category-badge").innerText.toLowerCase();
+    
+            let show = true;
+    
+            // Filter by search
+            if (!title.includes(searchValue) && !category.includes(searchValue)) {
+                show = false;
+            }
+    
+            // Filter by category
+            if (selectedCategory !== "all" && category !== selectedCategory) {
+                show = false;
+            }
+    
+            // Show / hide
+            wrapper.style.display = show ? "block" : "none";
+            if (show) visibleCount++;
+        });
+    
+        // No results section
+        document.getElementById("noResults").classList.toggle("d-none", visibleCount !== 0);
+    
+        // SORTING
+        sortProducts(sortValue);
+    }
+    
+    // ------------------- SORT CARDS -------------------
+    function sortProducts(type) {
+        const container = document.querySelector(".row.g-4");
+        const cards = Array.from(container.children);
+    
+        if (type === "price-low") {
+            cards.sort((a, b) =>
+                Number(a.querySelector(".price-tag").innerText.replace("₹", "").replace(",", "")) -
+                Number(b.querySelector(".price-tag").innerText.replace("₹", "").replace(",", ""))
+            );
+        }
+        else if (type === "price-high") {
+            cards.sort((a, b) =>
+                Number(b.querySelector(".price-tag").innerText.replace("₹", "").replace(",", "")) -
+                Number(a.querySelector(".price-tag").innerText.replace("₹", "").replace(",", ""))
+            );
+        }
+        else if (type === "name") {
+            cards.sort((a, b) =>
+                a.querySelector(".card-title").innerText.localeCompare(
+                    b.querySelector(".card-title").innerText)
+            );
+        }
+    
+        container.innerHTML = "";
+        cards.forEach(card => container.appendChild(card));
+    }
+    
+    // ------------------- ADD TO CART -------------------
+    function addToCart(id, title, price, img) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Check if product already exists in cart
+        let existingItem = cart.find(item => item.id === id);
+
+        if (existingItem) {
+            existingItem.qty += 1;
+        } else {
+            // SAVE REAL DATA HERE
+            cart.push({ 
+                id: id, 
+                title: title, 
+                price: price, 
+                img: img, 
+                qty: 1 
+            });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(title + " added to trolley!");
+    }
+    
+    </script>
+    
+
+</body>

@@ -1,0 +1,280 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | SmartTrolley</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Modern Animated Background */
+    .full-page {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      /* Allow scrolling for signup page since it is taller */
+      overflow-y: auto; 
+      margin: 0;
+      padding: 2rem 0; /* Add padding to prevent cut-off on small screens */
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Background Shapes */
+    .circles {
+      position: fixed; /* Fixed so they stay behind when scrolling */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1; /* Behind content */
+    }
+    .circles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      animation: animate 25s linear infinite;
+      bottom: -150px;
+      border-radius: 50%;
+    }
+    .circles li:nth-child(1){ left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+    .circles li:nth-child(2){ left: 10%; width: 20px; height: 20px; animation-delay: 2s; }
+    .circles li:nth-child(3){ left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+    .circles li:nth-child(4){ left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+    
+    @keyframes animate {
+      0%{ transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+      100%{ transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+    }
+
+    /* Glassmorphism Card (Reusing Login Style) */
+    .signup-card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 700px; /* Kept wide for signup fields */
+      margin: 2rem auto;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typography & Icons */
+    .logo-icon {
+      font-size: 3rem;
+      background: linear-gradient(45deg, #23a6d5, #23d5ab);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .signup-heading {
+      font-weight: 700;
+      color: #333;
+      letter-spacing: -0.5px;
+    }
+
+    .text-muted {
+      color: #6c757d !important;
+      font-size: 0.95rem;
+    }
+
+    /* Modern Inputs */
+    .form-label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-control, .form-select {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #e1e1e1;
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+      background: #fff;
+      border-color: #23a6d5;
+      box-shadow: 0 0 0 4px rgba(35, 166, 213, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Buttons & Links */
+    .btn-custom {
+      background: linear-gradient(45deg, #23a6d5, #1e88e5);
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 0.8rem;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(35, 166, 213, 0.3);
+    }
+
+    .btn-custom:hover {
+      background: linear-gradient(45deg, #1e88e5, #23a6d5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(35, 166, 213, 0.4);
+    }
+
+    .link-custom {
+      color: #1e88e5;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    
+    .link-custom:hover {
+      color: #1565c0;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="full-page">
+    
+
+
+  <ul class="circles">
+    <li></li><li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li><li></li>
+  </ul>
+
+  <div class="container">
+    <div class="signup-card">
+      <div class="text-center mb-4">
+        <i class="bi bi-cart4 logo-icon"></i>
+        <h3 class="signup-heading mt-2">Join Smart Trolley</h3>
+        <p class="text-muted">Create your account to get started</p>
+      </div>
+
+      <form action="/signup" method="POST" novalidate class="needs-validation">
+        
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="name@example.com"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            name="phone"
+            placeholder="10-digit phone number"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="community" class="form-label">Community</label>
+          <input
+            type="text"
+            class="form-control"
+            id="community"
+            name="community"
+            placeholder="e.g. Green Valley Farmers"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            class="form-control"
+            id="location"
+            name="location"
+            placeholder="e.g. Nashik, Maharashtra"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="role" class="form-label">Role</label>
+          <select class="form-select" id="role" name="role" required>
+            <option value="">Select your role</option>
+            <option value="farmer">Farmer</option>
+            <option value="renter">Renter</option>
+            <option value="both">Both</option>
+          </select>
+        </div>
+
+        <div class="d-grid mt-4">
+          <button type="submit" class="btn btn-custom btn-lg">
+            <i class="bi bi-person-plus-fill"></i> Create Account
+          </button>
+        </div>
+
+        <div class="text-center mt-3">
+          <p class="text-muted small">
+            Already have an account? <a href="/login" class="link-custom">Log in</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

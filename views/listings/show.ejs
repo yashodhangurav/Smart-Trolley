@@ -1,0 +1,449 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= listing.title %> | SmartTrolley Details</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <style>
+    /* === SmartTrolley Blue E-commerce Theme === */
+    :root {
+      --st-blue-primary: #0d6efd; /* Vibrant e-commerce blue */
+      --st-blue-dark: #0a58ca;
+      --st-blue-light: #e7f1ff;
+      --st-text-dark: #212529;
+      --st-text-muted: #6c757d;
+      --st-bg-gray: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--st-bg-gray);
+      color: var(--st-text-dark);
+    }
+
+    /* Breadcrumb/Back Link */
+    .back-nav {
+      padding: 1rem 0;
+    }
+    .back-link {
+      text-decoration: none;
+      color: var(--st-text-muted);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--st-blue-primary);
+    }
+
+    /* Main Product Card Container */
+    .product-main-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* Left Column: Image */
+    .product-image-container {
+      height: 100%;
+      min-height: 450px;
+      background: #f0f0f0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .details-image {
+      max-width: 100%;
+      max-height: 500px;
+      object-fit: contain; /* Ensures whole image is visible like e-commerce */
+      border-radius: 8px;
+      /* Subtle hover effect */
+      transition: transform 0.3s ease;
+    }
+    .product-image-container:hover .details-image {
+      transform: scale(1.02);
+    }
+
+    /* Right Column: Details Content */
+    .product-details-content {
+      padding: 2rem;
+    }
+
+    .details-title {
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    /* Badges */
+    .badge-st {
+      background-color: var(--st-blue-light);
+      color: var(--st-blue-primary);
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+
+    /* Price Section */
+    .price-section {
+      margin: 1.5rem 0;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+    }
+    .current-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--st-blue-primary);
+    }
+    .price-unit {
+      font-size: 1rem;
+      color: var(--st-text-muted);
+      font-weight: 400;
+    }
+
+    /* Features List */
+    .feature-list-st {
+      list-style: none;
+      padding: 0;
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+      gap: 10px;
+    }
+    .feature-list-st li {
+      font-size: 0.95rem;
+      color: var(--st-text-dark);
+      display: flex;
+      align-items: center;
+    }
+    .feature-list-st li i {
+      color: var(--st-blue-primary);
+      margin-right: 8px;
+      font-size: 1.1rem;
+    }
+
+    /* Owner/Seller Card */
+    .seller-card {
+      background: #f8faff;
+      border: 1px solid #e1e7f5;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 2rem;
+    }
+    
+    /* Buttons */
+    .btn-st-primary {
+      background-color: var(--st-blue-primary);
+      border: none;
+      font-weight: 600;
+      padding: 10px 20px;
+      transition: all 0.2s;
+    }
+    .btn-st-primary:hover {
+      background-color: var(--st-blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+    }
+    .btn-st-outline {
+      color: var(--st-blue-primary);
+      border-color: var(--st-blue-primary);
+      font-weight: 600;
+    }
+    .btn-st-outline:hover {
+      background-color: var(--st-blue-primary);
+      color: white;
+    }
+    .btn-whatsapp-green {
+        background-color: #25D366; /* WhatsApp Brand Color */
+        color: white;
+        font-weight: 600;
+        border: none;
+    }
+    .btn-whatsapp-green:hover {
+         background-color: #1da851;
+         color: white;
+    }
+
+
+    /* === Reviews Section Styles === */
+    .reviews-container {
+      margin-top: 3rem;
+    }
+    .review-section-title {
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .write-review-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+      padding: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* Star Rating Input */
+    .star-rating-input {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      gap: 5px;
+    }
+    .star-rating-input input { display: none; }
+    .star-rating-input label {
+      font-size: 1.8rem;
+      color: #e4e5e9;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .star-rating-input input:checked ~ label,
+    .star-rating-input label:hover,
+    .star-rating-input label:hover ~ label {
+      color: #ffc107; /* Yellow for stars looks best even in blue theme */
+    }
+
+    /* Form Inputs Focus State (Blue) */
+    .form-control:focus {
+      border-color: var(--st-blue-primary);
+      box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
+    }
+
+    /* Existing Reviews List */
+    .review-card-item {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      border: 1px solid #eee;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .review-star-badge {
+        background: #ffc107;
+        color: #212529;
+        font-weight: 600;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container pb-5">
+    
+    <div class="back-nav">
+      <a href="/home/listings" class="back-link">
+        <i class="bi bi-arrow-left"></i> Back to Products
+      </a>
+    </div>
+
+    <div class="product-main-card mb-5">
+      <div class="row g-0"> <div class="col-lg-6 bg-light">
+          <div class="product-image-container">
+            <img 
+              src="<%= listing.imageUrl.url %>" 
+              alt="<%= listing.title %>"
+              class="details-image"
+              onerror="this.onerror=null; this.src='https://placehold.co/800x600/e9ecef/6c757d?text=No+Image+Available';" 
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-6 border-start border-light">
+          <div class="product-details-content">
+            
+            <h1 class="details-title"><%= listing.title %></h1>
+            
+            <div class="mb-3">
+              <span class="badge-st text-capitalize">
+                 <i class="bi bi-tag-fill"></i> <%= listing.category %>
+              </span>
+           
+              <% if (listing.stock > 0) { %>
+                 <span class="badge-st" style="background:#e7ffe7; color:#28a745;">
+                    <i class="bi bi-box-seam"></i> <%= listing.stock %> in stock
+                 </span>
+              <% } else { %>
+                 <span class="badge-st" style="background:#ffe7e7; color:#dc3545;">
+                    <i class="bi bi-x-circle"></i> Out of stock
+                 </span>
+              <% } %>
+           </div>
+           
+
+            <div class="price-section">
+              <span class="current-price">&#8377;<%= listing.pricePerDay.toLocaleString("en-IN") %></span>
+              <span class="price-unit">/-</span>
+            </div>
+
+            <div class="mb-4">
+              <h5 class="fw-bold mb-2">Overview</h5>
+              <p class="text-muted" style="line-height: 1.6;"><%= listing.description %></p>
+            </div>
+
+            <div class="mb-4">
+              <h5 class="fw-bold mb-2">Product Specifications</h5>
+              <ul class="feature-list-st">
+                 <li><i class="bi bi-check-circle-fill"></i> High-quality build material</li>
+                 <li><i class="bi bi-check-circle-fill"></i> Verified seller listing</li>
+                 <li><i class="bi bi-check-circle-fill"></i> Trusted by multiple customers</li>
+                 <li><i class="bi bi-check-circle-fill"></i> Fast delivery / easy pickup</li>
+              </ul>
+           </div>
+           
+
+            <div class="seller-card">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="d-flex align-items-center">
+                   <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-flex align-items-center justify-content-center text-primary me-3">
+                      <i class="bi bi-person-fill fs-4"></i>
+                   </div>
+                   <div>
+                      <h6 class="fw-bold mb-0"><%=listing.owner.username %> (Owner)</h6>
+                      <small class="text-muted">Member since <%= listing.owner.joinedAt.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }) %></small>
+                   </div>
+                </div>
+                <div>
+                  <span class="badge bg-info text-dark fw-semibold">
+                     <i class="bi bi-shield-check"></i> Verified Seller
+                  </span>
+               </div>
+               
+              </div>
+
+              <div class="row g-2">
+                <div class="col-6">
+                   <a href="https://wa.me/<%=listing.owner.phone%>" target="_blank" class="btn btn-whatsapp-green w-100">
+                    <i class="bi bi-whatsapp"></i> WhatsApp
+                   </a>
+                </div>
+                <div class="col-6">
+                   <a href="tel:+91<%=listing.owner.phone%>" class="btn btn-st-primary w-100">
+                    <i class="bi bi-telephone-fill"></i> Call Now
+                   </a>
+                </div>
+              </div>
+            </div>
+
+            <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+               <div class="d-flex gap-2 mt-4 pt-3 border-top">
+                 <form action="/home/listings/<%= listing._id %>/edit" class="flex-grow-1">
+                   <button class="btn btn-st-outline w-100">
+                     <i class="bi bi-pencil-square"></i> Edit Listing
+                   </button>
+                 </form>
+                 <form method="post" action="/home/listings/<%= listing._id %>?_method=DELETE" class="flex-grow-1">
+                   <button class="btn btn-outline-danger w-100">
+                     <i class="bi bi-trash"></i> Delete Listing
+                   </button>
+                 </form>
+               </div>
+             <% } %>
+
+          </div> </div> </div> </div> <div class="row reviews-container justify-content-center">
+      <div class="col-lg-10">
+        <h3 class="review-section-title"><i class="bi bi-stars text-warning"></i> Ratings & Reviews</h3>
+        <hr class="mb-4">
+
+        <div class="row">
+          <div class="col-md-5 mb-4 mb-md-0 order-md-2">
+             <% if(currUser) { %>
+                <div class="write-review-card sticky-top" style="top: 2rem; z-index: 1;">
+                   <h5 class="fw-bold mb-3">Write a Review</h5>
+                   <form action="/home/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+                      <div class="mb-3 text-center">
+                         <label class="form-label text-muted small text-uppercase fw-bold">Tap to Rate</label>
+                         <div class="star-rating-input justify-content-center">
+                            <input type="radio" id="star5" name="review[rating]" value="5" required/><label for="star5" class="bi bi-star-fill"></label>
+                            <input type="radio" id="star4" name="review[rating]" value="4"/><label for="star4" class="bi bi-star-fill"></label>
+                            <input type="radio" id="star3" name="review[rating]" value="3"/><label for="star3" class="bi bi-star-fill"></label>
+                            <input type="radio" id="star2" name="review[rating]" value="2"/><label for="star2" class="bi bi-star-fill"></label>
+                            <input type="radio" id="star1" name="review[rating]" value="1"/><label for="star1" class="bi bi-star-fill"></label>
+                         </div>
+                         <div class="invalid-feedback">Please select a star rating.</div>
+                      </div>
+    
+                      <div class="mb-3">
+                         <label for="comment" class="form-label text-muted small text-uppercase fw-bold">Your Feedback</label>
+                         <textarea id="comment" name="review[comment]" class="form-control bg-light" rows="4" placeholder="Share your experience with this machinery..." required></textarea>
+                         <div class="invalid-feedback">Please write a comment.</div>
+                      </div>
+    
+                      <button type="submit" class="btn btn-st-primary w-100">Submit Review</button>
+                   </form>
+                </div>
+             <% } else { %>
+                <div class="alert alert-primary d-flex align-items-center" role="alert">
+                   <i class="bi bi-info-circle-fill flex-shrink-0 me-2 fs-4"></i>
+                   <div>Please <a href="/login" class="alert-link">log in</a> to leave a review.</div>
+                </div>
+             <% } %>
+          </div>
+
+          <div class="col-md-7 order-md-1">
+            <h5 class="fw-bold mb-3">Customer Feedback (<%= listing.reviews.length %>)</h5>
+             <% if (listing.reviews && listing.reviews.length > 0) { %>
+                <div class="d-flex flex-column gap-3">
+                   <% listing.reviews.forEach(review => { %>
+                      <div class="review-card-item">
+                         <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex align-items-center">
+                               <div class="rounded-circle bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px; color: var(--st-text-dark); font-weight: 600;">
+                                  <%= review.author.username.charAt(0).toUpperCase() %>
+                               </div>
+                               <div>
+                                  <h6 class="fw-bold mb-0"><%= review.author.username %></h6>
+                                  <small class="text-muted"><%= new Date(review.createdAt).toLocaleDateString() %></small>
+                               </div>
+                            </div>
+                            <span class="badge review-star-badge">
+                               <i class="bi bi-star-fill small"></i> <%= review.rating %>
+                            </span>
+                         </div>
+                         
+                         <p class="mt-3 mb-1 text-dark" style="line-height: 1.5;"><%= review.comment %></p>
+    
+                         <% if (currUser && review.author && currUser._id.equals(review.author._id)) { %>
+                            <form method="post" action="/home/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=delete" class="text-end mt-2">
+                               <button class="btn btn-link text-danger p-0 text-decoration-none small fw-bold">
+                                  <i class="bi bi-trash"></i> Delete
+                               </button>
+                            </form>
+                         <% } %>
+                      </div>
+                   <% }) %>
+                </div>
+             <% } else { %>
+                <div class="text-center py-5 text-muted bg-white rounded-4 border">
+                   <i class="bi bi-chat-square-quote display-4 d-block mb-3 opacity-50"></i>
+                   <h5>No reviews yet</h5>
+                   <p>Be the first to share your experience with this product!</p>
+                </div>
+             <% } %>
+          </div>
+        </div> </div>
+    </div>
+
+  </div> </body>
+</html>

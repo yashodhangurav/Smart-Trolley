@@ -1,0 +1,282 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Trolley | SmartTrolley</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        /* === SmartTrolley Modern Blue Theme === */
+        :root {
+            --st-blue-primary: #0d6efd;
+            --st-bg-color: #f4f6f9;
+            --st-text-main: #212529;
+            --st-border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--st-bg-color);
+            color: var(--st-text-main);
+        }
+
+        /* Card Styles */
+        .cart-item-card {
+            background: #fff;
+            border-radius: var(--st-border-radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-img-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .cart-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex-grow: 1;
+            padding-left: 1rem;
+        }
+
+        .item-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            display: block;
+            text-decoration: none;
+            color: var(--st-text-main);
+        }
+
+        /* Qty Buttons */
+        .qty-control {
+            display: flex;
+            align-items: center;
+            background: #f1f3f5;
+            border-radius: 20px;
+            padding: 2px 8px;
+            width: fit-content;
+        }
+        .qty-btn {
+            background: none; border: none; font-weight: bold; cursor: pointer; color: var(--st-blue-primary); font-size: 1.1rem;
+        }
+        .qty-input {
+            width: 30px; text-align: center; border: none; background: transparent; font-weight: 600; outline: none;
+        }
+
+        /* Summary Card */
+        .summary-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: var(--st-border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 12px;
+            background: var(--st-blue-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        .btn-checkout:hover { background: #0b5ed7; }
+
+        .back-link { text-decoration: none; color: #6c757d; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 1rem; }
+        .back-link:hover { color: var(--st-blue-primary); }
+
+    /* empty cart msg button */
+        .btn-dark-blue {
+            background-color: #013a8c !important;  /* Dark Blue */
+            border-color: #013a8c !important;
+            color: white !important;
+        }
+
+        .btn-dark-blue:hover {
+            background-color: #002b6a !important;  /* Slightly darker on hover */
+            border-color: #002b6a !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container py-5">
+    
+    <div class="row">
+        <div class="col-12">
+            <a href="/home/listings" class="back-link">
+                <i class="bi bi-arrow-left"></i> Continue Shopping
+            </a>
+            <h2 class="fw-bold mb-4">My Trolley <span id="cartCount" class="fs-6 text-muted fw-normal"></span></h2>
+        </div>
+    </div>
+
+    <div id="cartContent" class="row">
+        </div>
+
+</div>
+
+<script>
+    // ---------------------------------------------------------
+    //  UPDATED CART LOGIC (No Fake Database)
+    // ---------------------------------------------------------
+    
+    function loadCart() {
+        // 1. Get the REAL data saved from your listing page
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const container = document.getElementById("cartContent");
+        
+        // Update Count
+        const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+        document.getElementById("cartCount").innerText = `(${totalQty} items)`;
+
+        // --- EMPTY STATE ---
+        if (cart.length === 0) {
+            container.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <div class="bg-white p-5 rounded-4 border shadow-sm">
+                        <i class="bi bi-cart-x display-1 text-muted opacity-25"></i>
+                        <h3 class="mt-3">Your trolley is empty</h3>
+                       <a href="/home/listings" class="btn btn-dark-blue mt-3 px-4 rounded-pill">Browse Products</a>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        // --- CALCULATE TOTALS ---
+        let subtotal = 0;
+        let itemsHtml = '';
+
+        cart.forEach(item => {
+            // Use the REAL title/price/image stored in the item object
+            const itemTotal = item.price * item.qty;
+            subtotal += itemTotal;
+
+            // Handle missing images gracefully
+            const displayImg = item.img || 'https://placehold.co/100x100?text=No+Image';
+
+            itemsHtml += `
+                <div class="cart-item-card">
+                    <div class="cart-img-wrapper">
+                        <img src="${displayImg}" class="cart-img" alt="${item.title}">
+                    </div>
+                    
+                    <div class="item-details">
+                        <div class="row align-items-center">
+                            <div class="col-md-5">
+                                <a href="/home/listings/${item.id}" class="item-title">${item.title}</a>
+                                <small class="text-muted">Price: ₹${item.price}</small>
+                            </div>
+
+                            <div class="col-6 col-md-3 mt-2 mt-md-0">
+                                <div class="qty-control">
+                                    <button class="qty-btn" onclick="updateQty('${item.id}', -1)">-</button>
+                                    <input type="text" class="qty-input" value="${item.qty}" readonly>
+                                    <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-4 text-end mt-2 mt-md-0">
+                                <div class="fw-bold">₹${itemTotal}</div>
+                                <button class="btn btn-link text-danger p-0 text-decoration-none small" onclick="removeItem('${item.id}')">
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        const deliveryFee = subtotal > 500 ? 0 : 40;
+        const total = subtotal + deliveryFee;
+
+        // --- RENDER HTML ---
+        container.innerHTML = `
+            <div class="col-lg-8">
+                ${itemsHtml}
+            </div>
+
+            <div class="col-lg-4">
+                <div class="summary-card">
+                    <h5 class="fw-bold mb-4">Bill Details</h5>
+                    
+                    <div class="d-flex justify-content-between mb-2 text-muted">
+                        <span>Item Total</span>
+                        <span>₹${subtotal}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-3 text-muted">
+                        <span>Delivery Fee</span>
+                        <span class="${deliveryFee === 0 ? 'text-success' : ''}">
+                            ${deliveryFee === 0 ? 'FREE' : '₹' + deliveryFee}
+                        </span>
+                    </div>
+
+                    <div class="d-flex justify-content-between border-top pt-3 fw-bold fs-5">
+                        <span>To Pay</span>
+                        <span class="text-primary">₹${total}</span>
+                    </div>
+
+                    <button class="btn-checkout">Checkout</button>
+                </div>
+            </div>
+        `;
+    }
+
+    // --- HELPER FUNCTIONS ---
+
+    function updateQty(id, change) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart = cart.map(item => {
+            if (item.id === id) {
+                const newQty = item.qty + change;
+                if (newQty < 1) return item;
+                return { ...item, qty: newQty };
+            }
+            return item;
+        });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        loadCart();
+    }
+
+    function removeItem(id) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart = cart.filter(item => item.id !== id);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        loadCart();
+    }
+
+    // Initialize
+    loadCart();
+</script>
+
+</body>
+</html>

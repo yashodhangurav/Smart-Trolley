@@ -1,0 +1,372 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<body>
+
+  <!-- Hero Section -->
+  <section id="hero" class="position-absolute ">
+    <div class="container py-8 py-md-10">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="hero-content">
+            <h1 class="display-4 fw-bold mb-4">Smart Shopping Trolley</h1>
+            <p class="lead mb-5">
+              Discover a smarter way to shop with our intelligent trolley system. 
+              Save time, track expenses, and enjoy seamless checkout with our innovative shopping solution.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+              
+              <form method="get" action="/home/listings">
+                <button class="btn btn-gradient btn-lg px-5 py-3 rounded-pill fw-semibold">
+                  <i class="fas fa-shopping-bag me-2"></i>Start Shopping
+                </button>
+              </form>
+              <a href="/home/guide" class="btn btn-outline-primary btn-lg px-5 py-3 rounded-pill fw-semibold">
+                <i class="fas fa-play-circle me-2"></i>How It Works
+              </a>
+            </div>
+            <div class="mt-5 d-flex align-items-center gap-4">
+              <div class="d-flex align-items-center">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-shipping-fast text-white"></i>
+                </div>
+                <div>
+                  <h5 class="fw-bold mb-0">Fast Delivery</h5>
+                  <small class="text-muted">Same-day delivery</small>
+                </div>
+              </div>
+              <div class="d-flex align-items-center">
+                <div class="bg-success rounded-circle p-2 me-3">
+                  <i class="fas fa-shield-alt text-white"></i>
+                </div>
+                <div>
+                  <h5 class="fw-bold mb-0">Secure Payment</h5>
+                  <small class="text-muted">100% secure</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="hero-image position-relative">
+            <div class="position-relative z-2">
+              <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                   class="img-fluid rounded-4 shadow-lg" 
+                   alt="Smart Shopping Trolley">
+            </div>
+            <div class="floating-card bg-white rounded-4 shadow-lg p-4 position-absolute top-0 end-0" style="width: 220px; transform: translate(30px, -30px);">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-bolt text-white"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-0">Fast Checkout</h6>
+                  <small class="text-muted">Under 2 minutes</small>
+                </div>
+              </div>
+              <div class="progress" style="height: 6px;">
+                <div class="progress-bar bg-primary" style="width: 85%;"></div>
+              </div>
+            </div>
+            <div class="floating-card bg-white rounded-4 shadow-lg p-4 position-absolute bottom-0 start-0" style="width: 220px; transform: translate(-30px, 30px);">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-warning rounded-circle p-2 me-3">
+                  <i class="fas fa-percentage text-white"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-0">Live Savings</h6>
+                  <small class="text-muted">Track in real-time</small>
+                </div>
+              </div>
+              <h4 class="fw-bold text-warning mb-0">₹1,234</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Assistant Button -->
+    <a href="/assistant" class="assistant-btn btn btn-gradient shadow-lg d-flex align-items-center justify-content-center position-fixed">
+      <i class="fas fa-robot fs-4"></i>
+    </a>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-8 bg-light">
+    <div class="container">
+      <div class="text-center mb-6">
+        <h2 class="fw-bold mb-3">Why Choose Smart Trolley?</h2>
+        <p class="text-muted lead">Experience the future of shopping with our intelligent features</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-card bg-white rounded-4 p-5 text-center h-100 shadow-sm">
+            <div class="feature-icon mx-auto mb-4">
+              <i class="fas fa-shopping-cart fs-1 text-primary"></i>
+            </div>
+            <h4 class="fw-bold mb-3">Smart Cart</h4>
+            <p class="text-muted">Real-time tracking of items and expenses with automatic categorization</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card bg-white rounded-4 p-5 text-center h-100 shadow-sm">
+            <div class="feature-icon mx-auto mb-4">
+              <i class="fas fa-robot fs-1 text-primary"></i>
+            </div>
+            <h4 class="fw-bold mb-3">AI Assistant</h4>
+            <p class="text-muted">Get personalized recommendations and shopping guidance</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card bg-white rounded-4 p-5 text-center h-100 shadow-sm">
+            <div class="feature-icon mx-auto mb-4">
+              <i class="fas fa-bolt fs-1 text-primary"></i>
+            </div>
+            <h4 class="fw-bold mb-3">Fast Checkout</h4>
+            <p class="text-muted">Complete purchases in seconds with one-touch payment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-8">
+    <div class="container">
+      <div class="cta-card bg-gradient rounded-4 p-6 text-white text-center">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="fw-bold mb-4">Ready to Shop Smarter?</h2>
+            <p class="mb-5 lead opacity-90">Join thousands of customers who have revolutionized their shopping experience</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <form method="get" action="/products">
+                <button class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-semibold">
+                  Start Free Trial
+                </button>
+              </form>
+              <a href="#contact" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill fw-semibold">
+                <i class="fas fa-play me-2"></i>Watch Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-8 bg-white">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-3 col-6">
+          <div class="text-center">
+            <h2 class="fw-bold text-primary display-4 mb-2">10K+</h2>
+            <p class="text-muted mb-0">Happy Customers</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="text-center">
+            <h2 class="fw-bold text-primary display-4 mb-2">50K+</h2>
+            <p class="text-muted mb-0">Orders Completed</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="text-center">
+            <h2 class="fw-bold text-primary display-4 mb-2">95%</h2>
+            <p class="text-muted mb-0">Satisfaction Rate</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="text-center">
+            <h2 class="fw-bold text-primary display-4 mb-2">24/7</h2>
+            <p class="text-muted mb-0">Support Available</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Styles -->
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      --primary-color: #4f46e5;
+    }
+
+    /* Hero Section */
+    #hero {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 0 !important;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234f46e5' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-image img {
+      transform: perspective(1000px) rotateY(-10deg);
+      transition: transform 0.5s ease;
+    }
+
+    .hero-image img:hover {
+      transform: perspective(1000px) rotateY(-5deg);
+    }
+
+    .floating-card {
+      animation: float 6s ease-in-out infinite;
+      z-index: 10;
+    }
+
+    .floating-card:nth-child(2) {
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translate(30px, -30px);
+      }
+      50% {
+        transform: translateY(-20px) translate(30px, -30px);
+      }
+    }
+
+    /* Feature Cards */
+    .feature-card {
+      transition: all 0.3s ease;
+      border: 1px solid #e2e8f0;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.1) !important;
+      border-color: #4f46e5;
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* CTA Card */
+    .cta-card {
+      background: var(--primary-gradient);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* Buttons */
+    .btn-gradient {
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+      color: white;
+    }
+
+    /* Assistant Button */
+    .assistant-btn {
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      z-index: 1050;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .assistant-btn:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.4);
+    }
+
+
+    /* Section Spacing */
+    section {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .py-6 { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+    .py-8 { padding-top: 6rem !important; padding-bottom: 6rem !important; }
+    .py-10 { padding-top: 8rem !important; padding-bottom: 8rem !important; }
+    .mb-6 { margin-bottom: 4rem !important; }
+    
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .floating-card {
+        display: none;
+      }
+      
+      .hero-image img {
+        transform: none;
+      }
+      
+      section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+      
+      .py-8 {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .btn-lg {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+      }
+    }
+  </style>
+</body>
