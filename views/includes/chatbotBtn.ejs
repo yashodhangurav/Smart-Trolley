@@ -1,20 +1,78 @@
-<a href="/home/chatbot" class="chatbot-btn btn btn-success shadow-lg d-flex align-items-center justify-content-center">
-    <i class="bi bi-robot fs-4"></i>
-  </a>
-  
-  <style>
+<a href="/home/chatbot" class="chatbot-btn d-flex align-items-center justify-content-center">
+  <i class="bi bi-robot fs-4"></i>
+</a>
+
+<style>
   .chatbot-btn {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
+    /* Modern Gradient Background (Coral/Red to match Chatbot Interface) */
+    background: linear-gradient(135deg, #ff6b6b, #ee5253);
+    color: white;
     border-radius: 50%;
+    text-decoration: none;
     z-index: 1050;
-    transition: all 0.3s ease;
+    
+    /* Modern Shadow & Transition */
+    box-shadow: 0 10px 25px rgba(238, 82, 83, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Floating Animation */
+    animation: floatBtn 3s ease-in-out infinite;
   }
+
+  /* Icon Styling */
+  .chatbot-btn i {
+    transition: transform 0.3s ease;
+  }
+
+  /* Hover Effects */
   .chatbot-btn:hover {
-    transform: scale(1.1);
-    background-color: #198754; /* darker green */
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 15px 35px rgba(238, 82, 83, 0.6);
+    color: white; /* Ensure icon stays white */
   }
-  </style>
+
+  .chatbot-btn:hover i {
+    transform: rotate(15deg) scale(1.1);
+  }
+
+  /* Pulse Ring Effect (to show it's active) */
+  .chatbot-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    border: 2px solid #ff6b6b;
+    animation: pulseRing 2s infinite;
+    z-index: -1;
+  }
+
+  /* Animations */
+  @keyframes floatBtn {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes pulseRing {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+
+  /* Responsive adjustment for mobile to not cover content */
+  @media (max-width: 768px) {
+    .chatbot-btn {
+      width: 55px;
+      height: 55px;
+      bottom: 20px;
+      right: 20px;
+    }
+  }
+</style>
