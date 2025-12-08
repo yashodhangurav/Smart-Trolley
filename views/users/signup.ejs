@@ -1,280 +1,197 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign Up | SmartTrolley</title>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    /* Modern Animated Background */
-    .full-page {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      min-height: 100vh;
-      /* Allow scrolling for signup page since it is taller */
-      overflow-y: auto; 
-      margin: 0;
-      padding: 2rem 0; /* Add padding to prevent cut-off on small screens */
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Floating Background Shapes */
-    .circles {
-      position: fixed; /* Fixed so they stay behind when scrolling */
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -1; /* Behind content */
-    }
-    .circles li {
-      position: absolute;
-      display: block;
-      list-style: none;
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.2);
-      animation: animate 25s linear infinite;
-      bottom: -150px;
-      border-radius: 50%;
-    }
-    .circles li:nth-child(1){ left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-    .circles li:nth-child(2){ left: 10%; width: 20px; height: 20px; animation-delay: 2s; }
-    .circles li:nth-child(3){ left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
-    .circles li:nth-child(4){ left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-    
-    @keyframes animate {
-      0%{ transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
-      100%{ transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
-    }
-
-    /* Glassmorphism Card (Reusing Login Style) */
-    .signup-card {
-      position: relative;
-      z-index: 10;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 20px;
-      padding: 2.5rem;
-      max-width: 700px; /* Kept wide for signup fields */
-      margin: 2rem auto;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Typography & Icons */
-    .logo-icon {
-      font-size: 3rem;
-      background: linear-gradient(45deg, #23a6d5, #23d5ab);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .signup-heading {
-      font-weight: 700;
-      color: #333;
-      letter-spacing: -0.5px;
-    }
-
-    .text-muted {
-      color: #6c757d !important;
-      font-size: 0.95rem;
-    }
-
-    /* Modern Inputs */
-    .form-label {
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 0.3rem;
-    }
-
-    .form-control, .form-select {
-      background: rgba(255, 255, 255, 0.9);
-      border: 2px solid #e1e1e1;
-      border-radius: 12px;
-      padding: 0.8rem 1rem;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-
-    .form-control:focus, .form-select:focus {
-      background: #fff;
-      border-color: #23a6d5;
-      box-shadow: 0 0 0 4px rgba(35, 166, 213, 0.1);
-      transform: translateY(-2px);
-    }
-
-    /* Buttons & Links */
-    .btn-custom {
-      background: linear-gradient(45deg, #23a6d5, #1e88e5);
-      border: none;
-      color: white;
-      font-weight: 600;
-      padding: 0.8rem;
-      border-radius: 12px;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(35, 166, 213, 0.3);
-    }
-
-    .btn-custom:hover {
-      background: linear-gradient(45deg, #1e88e5, #23a6d5);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(35, 166, 213, 0.4);
-    }
-
-    .link-custom {
-      color: #1e88e5;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    
-    .link-custom:hover {
-      color: #1565c0;
-      text-decoration: underline;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="full-page">
-    
-
-
-  <ul class="circles">
+<div class="signup-wrapper">
+  
+  <div class="tech-circles">
     <li></li><li></li><li></li><li></li><li></li>
     <li></li><li></li><li></li><li></li><li></li>
-  </ul>
-
-  <div class="container">
-    <div class="signup-card">
-      <div class="text-center mb-4">
-        <i class="bi bi-cart4 logo-icon"></i>
-        <h3 class="signup-heading mt-2">Join Smart Trolley</h3>
-        <p class="text-muted">Create your account to get started</p>
-      </div>
-
-      <form action="/signup" method="POST" novalidate class="needs-validation">
-        
-        <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            name="username"
-            placeholder="Enter your username"
-            required
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="name@example.com"
-            required
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="phone" class="form-label">Phone Number</label>
-          <input
-            type="text"
-            class="form-control"
-            id="phone"
-            name="phone"
-            placeholder="10-digit phone number"
-            required
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="community" class="form-label">Community</label>
-          <input
-            type="text"
-            class="form-control"
-            id="community"
-            name="community"
-            placeholder="e.g. Green Valley Farmers"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="location" class="form-label">Location</label>
-          <input
-            type="text"
-            class="form-control"
-            id="location"
-            name="location"
-            placeholder="e.g. Nashik, Maharashtra"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            required
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="role" class="form-label">Role</label>
-          <select class="form-select" id="role" name="role" required>
-            <option value="">Select your role</option>
-            <option value="farmer">Farmer</option>
-            <option value="renter">Renter</option>
-            <option value="both">Both</option>
-          </select>
-        </div>
-
-        <div class="d-grid mt-4">
-          <button type="submit" class="btn btn-custom btn-lg">
-            <i class="bi bi-person-plus-fill"></i> Create Account
-          </button>
-        </div>
-
-        <div class="text-center mt-3">
-          <p class="text-muted small">
-            Already have an account? <a href="/login" class="link-custom">Log in</a>
-          </p>
-        </div>
-      </form>
-    </div>
   </div>
 
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="signup-card">
+          
+          <div class="text-center mb-4">
+            <div class="logo-box mb-3">
+              <i class="fas fa-shopping-basket text-white fs-2"></i>
+            </div>
+            <h2 class="fw-bold text-dark">Create Account</h2>
+            <p class="text-muted">Join the smart shopping revolution today.</p>
+          </div>
+
+          <form action="/signup" method="POST" class="needs-validation" novalidate>
+            
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="John Doe" required>
+                  <label for="fullname">Full Name</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="username" name="username" placeholder="johndoe123" required>
+                  <label for="username">Username</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+              <label for="email">Email Address</label>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="phone" name="phone" placeholder="9876543210" pattern="[0-9]{10}" required>
+                  <label for="phone">Mobile Number</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <select class="form-select" id="gender" name="gender">
+                    <option value="" selected>Prefer not to say</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <label for="gender">Gender (Optional)</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-floating mb-4">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+              <label for="password">Password</label>
+            </div>
+
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" value="" id="terms" required>
+              <label class="form-check-label text-muted small" for="terms">
+                I agree to the <a href="#" class="text-decoration-none text-primary">Terms of Service</a> and <a href="#" class="text-decoration-none text-primary">Privacy Policy</a>.
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold btn-glow mb-3">
+              Create Account
+            </button>
+
+            <div class="text-center">
+              <span class="text-muted small">Already a member?</span>
+              <a href="/login" class="text-primary fw-bold text-decoration-none ms-1">Log In</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</body>
-</html>
+
+<style>
+  /* 1. Setup & Background */
+  :root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --accent-color: #4cc9f0;
+  }
+
+  /* Fixes navigation overlap issue */
+  body {
+    background-color: #f8f9fa;
+  }
+
+  .signup-wrapper {
+    position: relative;
+    min-height: calc(100vh - 85px); /* Full height minus navbar */
+    background: linear-gradient(135deg, #f6f8fd 0%, #eef2ff 100%);
+    overflow: hidden;
+    padding: 3rem 0;
+  }
+
+  /* 2. Tech Particle Background (The Blue Circles) */
+  .tech-circles {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .tech-circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px; height: 20px;
+    background: rgba(67, 97, 238, 0.15); /* Tech Blue transparency */
+    animation: floatUp 25s linear infinite;
+    bottom: -150px;
+    border-radius: 50%;
+  }
+
+  /* Randomize particle positions/sizes */
+  .tech-circles li:nth-child(1){ left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+  .tech-circles li:nth-child(2){ left: 10%; width: 20px; height: 20px; animation-delay: 2s; background: rgba(76, 201, 240, 0.2); }
+  .tech-circles li:nth-child(3){ left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+  .tech-circles li:nth-child(4){ left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+  .tech-circles li:nth-child(5){ left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+  .tech-circles li:nth-child(6){ left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(76, 201, 240, 0.1); }
+
+  @keyframes floatUp {
+    0%{ transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+    100%{ transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+  }
+
+  /* 3. Glassmorphism Card */
+  .signup-card {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(67, 97, 238, 0.08);
+  }
+
+  /* 4. Form Elements */
+  .logo-box {
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+  }
+
+  .form-floating > .form-control,
+  .form-floating > .form-select {
+    border: 1px solid #e2e8f0;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+  }
+
+  .form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+  }
+
+  /* 5. Button */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 576px) {
+    .signup-card { padding: 2rem; }
+  }
+</style>

@@ -21,6 +21,9 @@ router.get("/", validateListing,wrapAsync(listingController.home));
 // cart route
 router.get("/cart", listingController.cart );
 
+// contactUs route
+router.get("/contact", listingController.contact );
+
 // index route
 router.get("/listings", validateListing,wrapAsync(listingController.index));
 

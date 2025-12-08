@@ -1,187 +1,188 @@
-<nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm trolley-navbar">
-  <div class="container">
-      <div class="logo-outside">
-          <a class="navbar-brand" href="/home">
-              <img src="/logo/smart-trolley-logo.png" alt="Smart Trolley Logo" class="trolley-logo">
-          </a>
-      </div>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg fixed-top modern-navbar" id="mainNav">
+    <div class="container">
+      
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/home">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 10C16 10 17.5 9 18 7" stroke="#4cc9f0" stroke-width="2" stroke-linecap="round"/>
+            <path d="M15 7C15 7 16 6.5 16.5 5" stroke="#4cc9f0" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="9" cy="21" r="1" stroke="white" stroke-width="2"/>
+            <circle cx="20" cy="21" r="1" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">Smart<span class="text-highlight">Trolley</span></span>
+      </a>
+  
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </button>
-
+  
       <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                  <a class="nav-link active" href="/home">Home</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/home/features">Features</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/home/listings/new">Products</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/home/contact">Contact Us</a>
-              </li>
-          </ul>
-          <div class="ms-lg-3 d-flex align-items-center">
-              <%if(!currUser) {%>
-                  <a href="/login" class="btn btn-modern-ghost me-2">Log In</a>
-                  <a href="/signup" class="btn btn-modern-primary">Sign Up</a>
-              <% } %>
-              <% if(currUser) { %>
-                  <a href="/home/cart" class="btn btn-modern-secondary me-2"><i class="bi bi-cart"></i> Cart</a>
-                  <a href="/logout" class="btn btn-modern-danger">Log Out</a>
-              <% } %>
-          </div>
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item">
+            <a class="nav-link px-3" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="/home/features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="/home/listings/new">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="/home/contact">Contact Us</a>
+          </li>
+        </ul>
+  
+        <div class="d-flex align-items-center gap-2 ms-lg-4 mt-3 mt-lg-0">
+          <% if(!currUser) { %>
+            <a href="/login" class="btn btn-link text-decoration-none text-dark fw-semibold">Log In</a>
+            <a href="/signup" class="btn btn-primary rounded-pill px-4 btn-glow">Sign Up</a>
+          <% } %>
+          
+          <% if(currUser) { %>
+            <a href="/home/cart" class="btn btn-light rounded-pill position-relative me-2 border icon-btn">
+              <i class="fas fa-shopping-cart text-primary"></i>
+              <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </a>
+            <a href="/logout" class="btn btn-outline-danger rounded-pill px-4">Log Out</a>
+          <% } %>
+        </div>
       </div>
-  </div>
-</nav>
-
-
-<style>
-    /* Global Variables for easy color adjustments (Modern UI/UX practice) */
+    </div>
+  </nav>
+  
+  <style>
+    /* 1. CSS Variables */
     :root {
-        --primary-color: #0d47a1; /* Deep Ocean Blue */
-        --secondary-color: #1565c0; /* Brighter Blue */
-        --text-color: #212529;
-        --nav-bg: #f8f9fa; /* Off-white/Light Gray Background */
-        --link-hover-bg: rgba(13, 71, 161, 0.05); /* Light hover effect */
+        padding-top: 82px;
+      --nav-height: 80px;
+      --primary-color: #4361ee;
+      --accent-color: #4cc9f0;
+      --dark-text: #2b2d42;
     }
-
-    /* 1. Increased Height & Background */
-    .trolley-navbar {
-        background-color: var(--nav-bg) !important;
-        /* Padding to increase the height significantly */
-        padding-top: 1rem; 
-        padding-bottom: 1rem;
-        transition: all 0.3s ease-in-out;
+  
+    /* 2. Glassmorphism Navbar */
+    .modern-navbar {
+    
+      height: var(--nav-height);
+      background: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+      backdrop-filter: blur(12px); /* The frosted glass effect */
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
     }
-
-    .trolley-navbar .trolley-logo {
-        height: 48px; /* Slightly larger logo */
-        width: auto;
+  
+    /* 3. Logo Styling */
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
     }
     
-    .trolley-navbar .navbar-brand {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: var(--primary-color) !important;
-        letter-spacing: -0.5px; /* Tighter spacing for a modern look */
-    }
-
-    /* 2. Nav Links - Modern and Readable */
-    .trolley-navbar .nav-link {
-        color: var(--text-color) !important;
-        font-weight: 500;
-        font-size: 1.05rem; /* Slightly larger text */
-        position: relative;
-        margin: 0 15px; /* Increased horizontal spacing */
-        transition: color 0.3s ease, background-color 0.3s ease;
-        padding: 8px 10px; /* Padding for better click area/hover effect */
-        border-radius: 6px; /* Subtle rounded corners */
-    }
-
-    .trolley-navbar .nav-link.active {
-        color: var(--primary-color) !important;
-        font-weight: 600;
-        background-color: var(--link-hover-bg); /* Highlight active link with a subtle background */
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark-text);
+      letter-spacing: -0.5px;
     }
     
-    /* Removed the underline effect for a cleaner, modern look */
-    .trolley-navbar .nav-link::after {
-        content: none;
+    .text-highlight {
+      color: var(--primary-color);
     }
-
-    .trolley-navbar .nav-link:hover {
-        color: var(--primary-color) !important;
-        background-color: var(--link-hover-bg);
+  
+    /* 4. Navigation Links */
+    .nav-link {
+      font-weight: 500;
+      color: #6c757d !important;
+      position: relative;
+      transition: all 0.3s ease;
+      border-radius: 20px;
     }
-    
-    /* --- 3. Modernized Buttons --- */
-    .trolley-navbar .btn {
-        font-weight: 600;
-        border-radius: 8px; /* Slightly less rounded than pills for a modern aesthetic */
-        padding: 10px 20px;
-        font-size: 1rem;
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-color) !important;
+      background-color: rgba(67, 97, 238, 0.05);
     }
-    
-    /* Primary Action Button (Sign Up) */
-    .btn-modern-primary {
-        background-color: var(--primary-color);
-        border: 2px solid var(--primary-color);
-        color: white;
+  
+    /* 5. Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      font-weight: 600;
+      transition: transform 0.2s;
     }
-
-    .btn-modern-primary:hover {
-        background-color: var(--secondary-color);
-        border-color: var(--secondary-color);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  
+    .btn-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.35);
     }
-
-    /* Ghost/Outline Button (Log In) */
-    .btn-modern-ghost {
-        color: var(--primary-color);
-        border: 2px solid var(--primary-color);
-        background-color: transparent;
-    }
-
-    .btn-modern-ghost:hover {
-        background-color: var(--primary-color);
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
     }
     
-    /* Secondary/Cart Button */
-    .btn-modern-secondary {
-        background-color: #6c757d; 
-        border: 2px solid #6c757d;
-        color: white;
+    .icon-btn:hover {
+      background-color: #f1f5f9;
+      transform: scale(1.05);
     }
-
-    .btn-modern-secondary:hover {
-        background-color: #5a6268;
-        border-color: #545b62;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  
+    /* 6. Mobile Toggler Animation */
+    .hamburger-icon span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background-color: var(--dark-text);
+      margin: 5px 0;
+      transition: 0.3s;
+      border-radius: 2px;
     }
-    
-    /* Danger/Logout Button */
-    .btn-modern-danger {
-        background-color: #dc3545;
-        border: 2px solid #dc3545;
-        color: white;
-        box-shadow: none; /* Keep logout simple */
+  
+    .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
     }
-
-    .btn-modern-danger:hover {
-        background-color: #c82333;
-        border-color: #bd2130;
-        transform: translateY(-1px);
+    .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) {
+      opacity: 0;
     }
-    
-    /* Mobile Adjustments (Ensuring height reduces gracefully) */
+    .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+  
+    /* Mobile Adjustments */
     @media (max-width: 991px) {
-        .trolley-navbar {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-        .trolley-navbar .nav-link {
-            text-align: left;
-            margin: 0 0 5px 0;
-        }
-        .trolley-navbar .btn {
-            width: 100%;
-            margin-top: 10px;
-        }
-        .trolley-navbar .trolley-logo {
-            height: 35px;
-        }
+      .modern-navbar {
+        height: auto;
+        padding: 1rem 0;
+      }
+      
+      .navbar-collapse {
+        background: white;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin-top: 1rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      }
+      
+      .nav-link {
+        padding: 10px 0;
+      }
     }
-</style>
+  </style>

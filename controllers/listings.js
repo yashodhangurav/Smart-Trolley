@@ -22,6 +22,11 @@ module.exports.cart = (req,res)=>{
     res.render("listings/cart.ejs")
 };
 
+module.exports.contact = (req,res)=>{
+    res.render("listings/contact.ejs")
+};
+
+
 module.exports.new = (req,res)=>{ //isLoggedIn is middleware to check whether userLoggedin or not
     res.render("listings/new.ejs")
 };
