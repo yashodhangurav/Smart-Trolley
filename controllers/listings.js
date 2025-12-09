@@ -14,8 +14,8 @@ module.exports.index = async(req,res)=>{
     res.render("listings/index.ejs", {allListings})
 };
 
-module.exports.guide = (req,res)=>{
-    res.render("listings/guide.ejs");
+module.exports.features = (req,res)=>{
+    res.render("listings/features.ejs");
 };
 
 module.exports.cart = (req,res)=>{

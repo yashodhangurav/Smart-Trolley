@@ -28,7 +28,7 @@ router.get("/contact", listingController.contact );
 router.get("/listings", validateListing,wrapAsync(listingController.index));
 
 // guide route
-router.get("/guide", listingController.guide);
+router.get("/features", listingController.features);
 
 
 
