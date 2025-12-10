@@ -52,3 +52,9 @@ module.exports.logout = (req,res, next)=>{
         res.redirect("/home");
     }) 
 };
+
+module.exports.renderProfile = (req, res) => {
+    // We don't need to pass currUser explicitly if you have res.locals.currUser set up in app.js
+    // But we render the file located at views/users/profile.ejs
+    res.render("users/profile.ejs"); 
+};

@@ -33,4 +33,7 @@ router.post("/login",
 
 router.get("/logout", userController.logout )
 
+// profile
+router.get("/profile", userController.renderProfile);
+
 module.exports = router;

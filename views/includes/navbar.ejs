@@ -1,188 +1,188 @@
 <nav class="navbar navbar-expand-lg fixed-top modern-navbar" id="mainNav">
-    <div class="container">
-      
-      <a class="navbar-brand d-flex align-items-center gap-2" href="/home">
-        <div class="logo-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16 10C16 10 17.5 9 18 7" stroke="#4cc9f0" stroke-width="2" stroke-linecap="round"/>
-            <path d="M15 7C15 7 16 6.5 16.5 5" stroke="#4cc9f0" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="9" cy="21" r="1" stroke="white" stroke-width="2"/>
-            <circle cx="20" cy="21" r="1" stroke="white" stroke-width="2"/>
-          </svg>
-        </div>
-        <span class="logo-text">Smart<span class="text-highlight">Trolley</span></span>
-      </a>
-  
-      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="hamburger-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item">
-            <a class="nav-link px-3" href="/home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="/home/features">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="/home/listings/new">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="/home/contact">Contact Us</a>
-          </li>
-        </ul>
-  
-        <div class="d-flex align-items-center gap-2 ms-lg-4 mt-3 mt-lg-0">
-          <% if(!currUser) { %>
-            <a href="/login" class="btn btn-link text-decoration-none text-dark fw-semibold">Log In</a>
-            <a href="/signup" class="btn btn-primary rounded-pill px-4 btn-glow">Sign Up</a>
-          <% } %>
-          
-          <% if(currUser) { %>
-            <a href="/home/cart" class="btn btn-light rounded-pill position-relative me-2 border icon-btn">
-              <i class="fas fa-shopping-cart text-primary"></i>
-              <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                <span class="visually-hidden">New alerts</span>
-              </span>
+  <div class="container">
+    
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/home">
+      <div class="logo-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 10C16 10 17.5 9 18 7" stroke="#4cc9f0" stroke-width="2" stroke-linecap="round"/>
+          <path d="M15 7C15 7 16 6.5 16.5 5" stroke="#4cc9f0" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="9" cy="21" r="1" stroke="white" stroke-width="2"/>
+          <circle cx="20" cy="21" r="1" stroke="white" stroke-width="2"/>
+        </svg>
+      </div>
+      <span class="logo-text">Smart<span class="text-highlight">Trolley</span></span>
+    </a>
+
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="hamburger-icon">
+        <span></span><span></span><span></span>
+      </div>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link px-3" href="/home">Home</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="/home/features">Features</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="/home/listings/new">Products</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="/home/contact">Contact Us</a></li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3 ms-lg-4 mt-3 mt-lg-0">
+        
+        <% if(!currUser) { %>
+          <a href="/login" class="btn btn-link text-decoration-none text-dark fw-semibold">Log In</a>
+          <a href="/signup" class="btn btn-primary rounded-pill px-4 btn-glow">Sign Up</a>
+        <% } %>
+        
+        <% if(currUser) { %>
+          <a href="/home/cart" class="btn btn-light rounded-circle position-relative border icon-btn" data-bs-toggle="tooltip" title="My Cart">
+            <i class="fas fa-shopping-cart text-primary"></i>
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </a>
+
+          <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle-no-arrow" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="profile-avatar">
+                <span class="fw-bold"><%= currUser.username ? currUser.username.charAt(0).toUpperCase() : 'U' %></span>
+              </div>
             </a>
-            <a href="/logout" class="btn btn-outline-danger rounded-pill px-4">Log Out</a>
-          <% } %>
-        </div>
+            
+            <ul class="dropdown-menu dropdown-menu-end custom-dropdown animate slideIn" aria-labelledby="profileDropdown">
+              <li>
+                <div class="px-3 py-2">
+                  <p class="mb-0 small text-muted">Signed in as</p>
+                  <p class="mb-0 fw-bold text-dark"><%= currUser.username %></p>
+                </div>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" href="/profile">
+                  <i class="fas fa-user-circle me-2 text-primary"></i>My Profile
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/orders">
+                  <i class="fas fa-box-open me-2 text-primary"></i>My Orders
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item text-danger" href="/logout">
+                  <i class="fas fa-sign-out-alt me-2"></i>Log Out
+                </a>
+              </li>
+            </ul>
+          </div>
+        <% } %>
+
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
+
+<style>
+  /* 1. CSS Variables */
+  :root {
+    padding-top: 82px;
+    --nav-height: 80px;
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --accent-color: #4cc9f0;
+    --dark-text: #2b2d42;
+  }
+
+  /* 2. Glassmorphism Navbar */
+  .modern-navbar {
+    height: var(--nav-height);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+  }
+
+  /* 3. Logo Styling */
+  .logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+  }
+  .logo-text { font-size: 1.4rem; font-weight: 700; color: var(--dark-text); letter-spacing: -0.5px; }
+  .text-highlight { color: var(--primary-color); }
+
+  /* 4. Nav Links */
+  .nav-link { font-weight: 500; color: #6c757d !important; transition: all 0.3s ease; border-radius: 20px; }
+  .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; background-color: rgba(67, 97, 238, 0.05); }
+
+  /* 5. Buttons & Icons */
+  .btn-primary { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border: none; font-weight: 600; }
+  .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(67, 97, 238, 0.35); }
   
-  <style>
-    /* 1. CSS Variables */
-    :root {
-        padding-top: 82px;
-      --nav-height: 80px;
-      --primary-color: #4361ee;
-      --accent-color: #4cc9f0;
-      --dark-text: #2b2d42;
-    }
-  
-    /* 2. Glassmorphism Navbar */
-    .modern-navbar {
-    
-      height: var(--nav-height);
-      background: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
-      backdrop-filter: blur(12px); /* The frosted glass effect */
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-      transition: all 0.3s ease;
-    }
-  
-    /* 3. Logo Styling */
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
-    }
-    
-    .logo-text {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--dark-text);
-      letter-spacing: -0.5px;
-    }
-    
-    .text-highlight {
-      color: var(--primary-color);
-    }
-  
-    /* 4. Navigation Links */
-    .nav-link {
-      font-weight: 500;
-      color: #6c757d !important;
-      position: relative;
-      transition: all 0.3s ease;
-      border-radius: 20px;
-    }
-  
-    .nav-link:hover, .nav-link.active {
-      color: var(--primary-color) !important;
-      background-color: rgba(67, 97, 238, 0.05);
-    }
-  
-    /* 5. Buttons */
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      border: none;
-      font-weight: 600;
-      transition: transform 0.2s;
-    }
-  
-    .btn-glow:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.35);
-    }
-  
-    .icon-btn {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-    
-    .icon-btn:hover {
-      background-color: #f1f5f9;
-      transform: scale(1.05);
-    }
-  
-    /* 6. Mobile Toggler Animation */
-    .hamburger-icon span {
-      display: block;
-      width: 25px;
-      height: 2px;
-      background-color: var(--dark-text);
-      margin: 5px 0;
-      transition: 0.3s;
-      border-radius: 2px;
-    }
-  
-    .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(1) {
-      transform: rotate(-45deg) translate(-5px, 6px);
-    }
-    .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) {
-      opacity: 0;
-    }
-    .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
-      transform: rotate(45deg) translate(-5px, -6px);
-    }
-  
-    /* Mobile Adjustments */
-    @media (max-width: 991px) {
-      .modern-navbar {
-        height: auto;
-        padding: 1rem 0;
-      }
-      
-      .navbar-collapse {
-        background: white;
-        padding: 1rem;
-        border-radius: 1rem;
-        margin-top: 1rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      }
-      
-      .nav-link {
-        padding: 10px 0;
-      }
-    }
-  </style>
+  .icon-btn { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .icon-btn:hover { background-color: #f1f5f9; transform: scale(1.05); }
+
+  /* --- NEW: PROFILE AVATAR STYLES --- */
+  .profile-avatar {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px #e0e7ff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .profile-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
+  }
+
+  /* Custom Dropdown Menu */
+  .custom-dropdown {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 10px;
+    margin-top: 15px !important; /* Spacing from navbar */
+    min-width: 220px;
+  }
+
+  .dropdown-item {
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .dropdown-item:hover { background-color: #f8f9fa; color: var(--primary-color); transform: translateX(5px); }
+  .dropdown-item.text-danger:hover { background-color: #fff5f5; color: #dc3545 !important; }
+
+  /* Dropdown Animation */
+  .animate { animation-duration: 0.3s; animation-fill-mode: both; }
+  .slideIn { animation-name: slideIn; }
+  @keyframes slideIn {
+    0% { transform: translateY(15px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Mobile Toggler */
+  .hamburger-icon span { display: block; width: 25px; height: 2px; background-color: var(--dark-text); margin: 5px 0; transition: 0.3s; border-radius: 2px; }
+  .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+  .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) { opacity: 0; }
+  .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+  @media (max-width: 991px) {
+    .modern-navbar { height: auto; padding: 1rem 0; }
+    .navbar-collapse { background: white; padding: 1rem; border-radius: 1rem; margin-top: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .nav-link { padding: 10px 0; }
+    .dropdown-menu { border: none; box-shadow: none; background: #f8f9fa; margin-top: 10px !important; }
+  }
+</style>
