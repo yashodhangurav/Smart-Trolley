@@ -50,7 +50,11 @@
         
         <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="200">
           <div class="illustration-wrapper floating-animate pe-lg-5">
-            <img src="https://placehold.co/600x500/eef2ff/4361ee?text=Automatic+Scanning+Illustration" alt="Smart Scanning Illustration" class="img-fluid rounded-4 shadow-lg">
+            <img src="https://placehold.co/600x500/eef2ff/4361ee?text=Automatic+Scanning+Illustration" 
+                 alt="Smart Scanning Illustration" 
+                 class="img-fluid rounded-4 shadow-lg"
+                 loading="lazy" 
+                 decoding="async">
           </div>
         </div>
       </div>
@@ -96,7 +100,7 @@
           </div>
         </div>
 
-         <div class="col" data-aos="fade-up" data-aos-delay="400">
+        <div class="col" data-aos="fade-up" data-aos-delay="400">
           <div class="glass-card h-100 p-5 feature-card-hover">
             <div class="icon-box bg-gradient-warning mb-4">
               <i class="fas fa-mobile-alt text-white fs-3"></i>
@@ -106,7 +110,7 @@
           </div>
         </div>
 
-         <div class="col" data-aos="fade-up" data-aos-delay="500">
+        <div class="col" data-aos="fade-up" data-aos-delay="500">
           <div class="glass-card h-100 p-5 feature-card-hover">
             <div class="icon-box bg-gradient-info mb-4">
               <i class="fas fa-receipt text-white fs-3"></i>
@@ -116,7 +120,7 @@
           </div>
         </div>
 
-         <div class="col" data-aos="fade-up" data-aos-delay="600">
+        <div class="col" data-aos="fade-up" data-aos-delay="600">
           <div class="glass-card h-100 p-5 feature-card-hover">
             <div class="icon-box bg-gradient-danger mb-4">
               <i class="fas fa-charging-station text-white fs-3"></i>
@@ -133,7 +137,8 @@
   <section class="py-8">
     <div class="container" data-aos="zoom-in">
       <div class="cta-box bg-dark text-white p-5 p-lg-6 rounded-5 text-center position-relative overflow-hidden">
-        <div class="circuit-pattern"></div> <div class="position-relative z-2">
+        <div class="circuit-pattern"></div> 
+        <div class="position-relative z-2">
          <h2 class="fw-bold display-5 mb-4">Ready to experience it?</h2>
          <p class="lead opacity-75 mb-5 mx-auto" style="max-width: 600px;">
            Find a partner store near you and start shopping the smart way today.
@@ -149,9 +154,10 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({
-      once: true, /* Animations only happen once */
-      duration: 800, /* Animation duration */
-      offset: 120 /* Trigger offset */
+      once: true,      /* Animations only happen once (saves CPU) */
+      duration: 700,   /* Slightly faster */
+      offset: 100,
+      disable: 'mobile' /* CRITICAL: Disables animations on phones to prevent lag */
     });
   </script>
 
@@ -170,16 +176,23 @@
     body {
       font-family: var(--font-main);
       background-color: #f8f9fa;
-      /* Ensure padding for fixed navbar */
       padding-top: 85px; 
     }
 
-    /* The Tech Grid Background */
+    /* HARDWARE ACCELERATION - Prevents Lag */
+    .glass-card, .btn-glow, .floating-animate img {
+      will-change: transform;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    /* Fixed Background (Optimized) */
     .tech-background {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
       background-color: #f8faff;
       background-image: linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
       background-size: 40px 40px; opacity: 0.6;
+      pointer-events: none; /* Mouse ignores it */
     }
 
     /* Section Spacing */
@@ -187,29 +200,27 @@
     .mb-6 { margin-bottom: 4rem; }
     .letter-spacing-2 { letter-spacing: 2px; }
 
-    /* 2. Headers */
-    .features-header {
-      padding: 4rem 0 2rem;
-    }
+    /* Headers */
+    .features-header { padding: 4rem 0 2rem; }
 
-    /* 3. Glassmorphism Cards */
+    /* Glass Cards (Optimized Blur) */
     .glass-card {
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.75); /* More opaque = faster render */
+      backdrop-filter: blur(10px); /* Lower blur = smoother scroll */
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 24px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .feature-card-hover:hover {
-      transform: translateY(-15px);
-      box-shadow: 0 20px 40px rgba(67, 97, 238, 0.15);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(67, 97, 238, 0.1);
       border-color: var(--accent-color);
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
     }
 
-    /* 4. Icons & Gradients */
+    /* Icons */
     .icon-box {
       width: 70px; height: 70px;
       border-radius: 18px;
@@ -218,10 +229,9 @@
       transform: rotate(-5deg);
       transition: transform 0.3s ease;
     }
-    .feature-card-hover:hover .icon-box {
-       transform: rotate(0deg) scale(1.1);
-    }
+    .feature-card-hover:hover .icon-box { transform: rotate(0deg) scale(1.1); }
 
+    /* Gradients */
     .bg-gradient-primary { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); }
     .bg-gradient-accent { background: linear-gradient(135deg, var(--accent-color), #72efdd); }
     .bg-gradient-success { background: linear-gradient(135deg, var(--success-color), #20a4f3); }
@@ -229,37 +239,38 @@
     .bg-gradient-info { background: linear-gradient(135deg, #a78bfa, #c4b5fd); }
     .bg-gradient-danger { background: linear-gradient(135deg, var(--danger-color), #ff99ac); }
 
-    /* 5. Animations */
-    .floating-animate img {
-      animation: float 6s ease-in-out infinite;
-    }
+    /* Animations */
+    .floating-animate img { animation: float 6s ease-in-out infinite; }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+      50% { transform: translateY(-15px); }
     }
 
-    /* 6. Buttons & CTA */
+    /* Buttons */
     .btn-primary {
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       border: none;
-      transition: all 0.3s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .btn-glow:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(67, 97, 238, 0.4);
+      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
     }
 
     .circuit-pattern {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h80v80h-80z' fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='1'/%3E");
-      opacity: 0.3; z-index: 1;
+      opacity: 0.3; z-index: 1; pointer-events: none;
     }
 
-    /* Responsive Adjustments */
+    /* Mobile Adjustments */
     @media (max-width: 991px) {
       .py-8 { padding-top: 3rem; padding-bottom: 3rem; }
       .illustration-wrapper { margin-top: 2rem; }
+      
+      /* Disable expensive effects on mobile completely */
+      .glass-card { backdrop-filter: none; background: #fff; }
     }
   </style>
 </body>

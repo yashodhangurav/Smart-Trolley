@@ -1,31 +1,98 @@
-<!-- Flash Toast -->
 <% if (success && success.length > 0) { %>
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
-      <div class="toast align-items-center text-white bg-success border-0 shadow-lg show" role="alert">
-        <div class="d-flex">
-          <div class="toast-body">
-
-            <i class="bi bi-check-circle-fill me-2"></i> <%= success %> 
-
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+      <div class="toast modern-toast success-toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-body d-flex align-items-center p-0">
+              <div class="toast-icon-wrapper bg-success-subtle text-success">
+                  <i class="bi bi-check-lg fs-4"></i>
+              </div>
+              <div class="toast-content ps-3 py-3 flex-grow-1">
+                  <h6 class="mb-0 fw-bold text-dark">Success</h6>
+                  <p class="mb-0 text-muted small"><%= success %></p>
+              </div>
+              <button type="button" class="btn-close me-3" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>
+          <div class="progress-line bg-success"></div>
       </div>
-    </div>
-  <% } %>
-  
-  <% if (error && error.length > 0) { %>
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
-      <div class="toast align-items-center text-white bg-danger border-0 shadow-lg show" role="alert">
-        <div class="d-flex">
-          <div class="toast-body">
+  </div>
+<% } %>
 
-            <i class="bi bi-exclamation-triangle-fill me-2"></i> <%= error %>
-            
+<% if (error && error.length > 0) { %>
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+      <div class="toast modern-toast error-toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-body d-flex align-items-center p-0">
+              <div class="toast-icon-wrapper bg-danger-subtle text-danger">
+                  <i class="bi bi-exclamation-triangle fs-4"></i>
+              </div>
+              <div class="toast-content ps-3 py-3 flex-grow-1">
+                  <h6 class="mb-0 fw-bold text-dark">Attention Needed</h6>
+                  <p class="mb-0 text-muted small"><%= error %></p>
+              </div>
+              <button type="button" class="btn-close me-3" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>
+           <div class="progress-line bg-danger"></div>
       </div>
-    </div>
-  <% } %>
-  
+  </div>
+<% } %>
+
+<style>
+  /* 1. Base Toast Styling (Glass Effect) */
+  .modern-toast {
+      background: rgba(255, 255, 255, 0.95); /* Clean White */
+      border: none;
+      border-radius: 12px; /* Soft corners */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Deep modern shadow */
+      overflow: hidden;
+      min-width: 320px;
+      max-width: 400px;
+      /* Animation Entry */
+      transform: translateX(100%);
+      animation: slideInToast 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  @keyframes slideInToast {
+      from { transform: translateX(120%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+  }
+
+  /* 2. Color Variants (Left Border Accent) */
+  .success-toast {
+      border-left: 5px solid #2ec4b6; /* Teal Green */
+  }
+
+  .error-toast {
+      border-left: 5px solid #e71d36; /* Bright Red */
+  }
+
+  /* 3. Icon Wrapper (The colored circle) */
+  .toast-icon-wrapper {
+      width: 60px;
+      align-self: stretch; /* Full height */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  /* 4. Progress Line Animation */
+  .progress-line {
+      height: 3px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      animation: toastTimer 4s linear forwards;
+  }
+
+  @keyframes toastTimer {
+      from { width: 100%; }
+      to { width: 0%; }
+  }
+
+  /* 5. Close Button Adjustment */
+  .btn-close {
+      opacity: 0.3;
+      transition: opacity 0.2s;
+  }
+  .btn-close:hover {
+      opacity: 1;
+  }
+</style>
