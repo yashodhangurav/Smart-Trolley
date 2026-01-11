@@ -51,7 +51,14 @@
       <ul class="navbar-nav ms-auto align-items-center mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link px-3" href="/home">Home</a></li>
         <li class="nav-item"><a class="nav-link px-3" href="/home/features">Features</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="/home/listings/new">Products</a></li>
+
+        <!-- only whos username is admin that person can see this PRODUCT btn -->
+        <% if (currUser && currUser.username === "admin") { %>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="/home/listings/new">Products</a>
+          </li>
+        <% } %>
+        
         <li class="nav-item"><a class="nav-link px-3" href="/home/contact">Contact Us</a></li>
       </ul>
 
